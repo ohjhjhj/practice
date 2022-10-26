@@ -93,7 +93,7 @@ const setListModal = () => {
 		listGridOptions.api.setRowData(jsonData.detailCodeList); 
 	}
 };
-// O Get StandardUnitPrice
+// O Get StandardUnitPrice !!!!!
 const getStandardUnitPrice = (itemCode, unit) => {
     console.log(itemCode);
     let xhr = new XMLHttpRequest();
