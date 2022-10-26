@@ -168,15 +168,15 @@
 </div>
 <!--  ============================================================================================================ -->
 <script>
-     const myGrid = document.querySelector('#myGrid');
-     const myGrid2 = document.querySelector('#myGrid2');
+     const myGrid = document.querySelector('#myGrid');   // 표1
+     const myGrid2 = document.querySelector('#myGrid2'); // 표2
      
-     const datepicker = document.querySelector('#datepicker');
-     const customerList = document.querySelector('#customerList');
-     const itemList = document.querySelector('#itemList');
-     const unitList = document.querySelector('#unitList');
-     const amountList = document.querySelector('#amountList');
-     const batchSaveButton = document.querySelector("#batchSaveButton");
+     const datepicker = document.querySelector('#datepicker');     //견적등록일자
+     const customerList = document.querySelector('#customerList'); // 거래처코드
+     const itemList = document.querySelector('#itemList');         // 품목코드
+     const unitList = document.querySelector('#unitList');         // 단위코드
+     const amountList = document.querySelector('#amountList');     // 수량
+     const batchSaveButton = document.querySelector("#batchSaveButton"); // 일괄저장
   
      // O setup the grid after the page has finished loading
      document.addEventListener('DOMContentLoaded', () => { // 브라우저가 로드되기 전에 밑에 agGrid가 먼저 로드된다. 이것이 DOMContentLoaded
@@ -633,7 +633,9 @@
     }// 여기까지가 에러처리 
     }  
    //console.log(estGridOptions.getSelectedRowData())
-    newEstimateRowValue = estGridOptions.getSelectedRowData()[0];  // 일단 견적상세(estGridOptions)그리드에서 첫번째 선택된 행의 데이터를 newEstimateRowValue에 담는다. 구길이 소스: newEstimateRowValue=newEstimateRowValue[0];
+    newEstimateRowValue = estGridOptions.getSelectedRowData()[0];
+    // 일단 견적상세(estGridOptions)그리드에서 첫번째 선택된 행의 데이터를 newEstimateRowValue에 담는다.
+    // 구길이 소스: newEstimateRowValue=newEstimateRowValue[0];
     console.log(newEstimateRowValue.estimateDetailTOList);
     newEstimateRowValue.estimateDetailTOList = selectedRows;    // 여기 코드가 이상해서 이 부분만 보면 될 듯
     //console.log('@@@@@@@@@@@@ HERE!!!@@@@@@@@@@@@@')
@@ -651,13 +653,17 @@
     }).then( (result) => {  // 위 SWAL창이 뜬 다음
       if (result.isConfirmed) {  //결과가 컨펌이 되었을 경우
       let xhr = new XMLHttpRequest();  
-      xhr.open('POST', "${pageContext.request.contextPath}/logisales/estimate/new?method=addNewEstimate&estimateDate=" // 위의 값들을 addNewEstimate.do를 호출시켜서 던질거임
+      xhr.open('POST', "${pageContext.request.contextPath}/logisales/estimate/new?method=addNewEstimate&estimateDate="
+          // 위의 값들을 addNewEstimate.do를 호출시켜서 던질거임
           + datepicker.value + "&newEstimateInfo=" + encodeURI(newEstimateRowValue),
           true);
-      xhr.setRequestHeader('Accept', 'application/json');// (헤더이름,헤더값) HTTP요청 헤더에 포함하고자 하는 헤더 이름과 그 값인데 전에 무조건 open()뒤에는 send()메소드를 써주어야 한다.
+      xhr.setRequestHeader('Accept', 'application/json');
+      // (헤더이름,헤더값) HTTP요청 헤더에 포함하고자 하는 헤더 이름과 그 값인데 전에 무조건 open()뒤에는 send()메소드를 써주어야 한다.
       xhr.send();
       xhr.onreadystatechange = () => {  //callback함수 사용
-        if (xhr.readyState == 4 && xhr.status == 200) { // 숫자값에 따라 처리상태가 달라지는 것. xhr.readyState == 4 : 데이터를 전부 받은 상태,완료되었다.xhr.status == 200 : 서버로부터의 응답상태가 요청에 성공하였다는 의미.
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          // 숫자값에 따라 처리상태가 달라지는 것. xhr.readyState == 4 : 데이터를 전부 받은 상태,완료되었다.
+          // xhr.status == 200 : 서버로부터의 응답상태가 요청에 성공하였다는 의미.
           // 초기화 
           estGridOptions.api.setRowData([]);
           estDetailGridOptions.api.setRowData([]);

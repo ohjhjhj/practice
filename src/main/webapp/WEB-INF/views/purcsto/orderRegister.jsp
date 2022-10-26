@@ -117,7 +117,7 @@
         </form>
         <button id="getOrderListButton">재고처리 / 발주필요 목록조회</button>
         <button id="OrderDialogButton">모의재고처리 및 취합발주</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
+
         <!-- <button id="OptionOrderButton">임의 발주</button> -->
     </div>
 </article>

@@ -258,7 +258,7 @@
           return;
         }
         console.log(txt);
-        contractGridOptions.api.setRowData(txt.gridRowJson);
+        contractGridOptions.api.setRowData(txt.gridRowJson); // 수주가능견적을 띄움
         txt.gridRowJson.map((unit, idx) => {
           [].forEach.bind(unit.estimateDetailTOList)((val) => {    // [].forEach == Array.prototype.forEach
             estimateDetailList.push(val); // estDetailGrid에서 사용하기 위해 담음
@@ -475,7 +475,13 @@
        noti.push(estimateNo);
     });
     
-    let resultArray={"estimateNo":estimateNo ,"contractType":contractType,"contractRequester":contractRequester,"personCodeInCharge":personCodeInCharge,"discription":discription,"contractDate":contractDate,"customerCode":customerCode};
+    let resultArray={"estimateNo":estimateNo
+                    ,"contractType":contractType
+                    ,"contractRequester":contractRequester
+                    ,"personCodeInCharge":personCodeInCharge
+                    ,"discription":discription
+                    ,"contractDate":contractDate
+                    ,"customerCode":customerCode};
 
     resultArray=JSON.stringify(resultArray);
     // 수주 유형입력 안했을 때

@@ -103,7 +103,7 @@ public class ContractController {
 		
 		try {	
 			
-			HashMap<String,String[]>workingContractList = gson.fromJson(batchList,new TypeToken<HashMap<String,String[]>>() {}.getType()) ;
+			HashMap<String,String[]> workingContractList = gson.fromJson(batchList,new TypeToken<HashMap<String,String[]>>() {}.getType()) ;
 			map = logisalesService.addNewContract(workingContractList);
 			System.out.println("수주등록 map : "+ map);
 		} catch (Exception e1) {

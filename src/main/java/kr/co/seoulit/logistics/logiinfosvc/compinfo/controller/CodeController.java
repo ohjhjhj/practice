@@ -108,10 +108,10 @@ public class CodeController {
 
 	@RequestMapping(value = "/codedetail2/list", method = RequestMethod.POST)
 	public ModelMap findDetailCodeList(HttpServletRequest request, HttpServletResponse response) {
-		String divisionCode = request.getParameter("divisionCodeNo");	
+		String divisionCode = request.getParameter("divisionCodeNo");	 // CL-01을 받아옴
 		map = new ModelMap();
 		try {
-			ArrayList<CodeDetailTO> detailCodeList = compInfoService.getDetailCodeList(divisionCode); 
+			ArrayList<CodeDetailTO> detailCodeList = compInfoService.getDetailCodeList(divisionCode);
 
 			map.put("detailCodeList", detailCodeList);
 			map.put("errorCode", 1);

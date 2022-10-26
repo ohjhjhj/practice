@@ -55,20 +55,20 @@ public class LogisalesServiceImpl implements LogisalesService {
 
 		ModelMap resultMap = null;
 
-		String newEstimateNo = getNewEstimateNo(estimateDate);
+		String newEstimateNo = getNewEstimateNo(estimateDate); // 새로운 견적일련번호 생성
 
-		newEstimateTO.setEstimateNo(newEstimateNo);
+		newEstimateTO.setEstimateNo(newEstimateNo);  // 뷰단에서 보내온 견적 bean에 새로운 견적일련번호 할당
 
-		estimateMapper.insertEstimate(newEstimateTO);
+		estimateMapper.insertEstimate(newEstimateTO); // 견적 bean을 db에 올림
 			
-		ArrayList<EstimateDetailTO> estimateDetailTOList = newEstimateTO.getEstimateDetailTOList(); //bean객체
+		ArrayList<EstimateDetailTO> estimateDetailTOList = newEstimateTO.getEstimateDetailTOList(); // 견적상세리스트
 			
 		for (EstimateDetailTO bean : estimateDetailTOList) {
-			String newEstimateDetailNo = getNewEstimateDetailNo(newEstimateNo);
+			String newEstimateDetailNo = getNewEstimateDetailNo(newEstimateNo); // 견적상세 일련번호
 				
-			bean.setEstimateNo(newEstimateNo);
+			bean.setEstimateNo(newEstimateNo);  // 앞에 생성된 견적일련번호 할당
 				
-			bean.setEstimateDetailNo(newEstimateDetailNo);
+			bean.setEstimateDetailNo(newEstimateDetailNo); // 새롭게 생성된 견적상세 일련번호 할당
 		}
 
 		resultMap = batchEstimateDetailListProcess(estimateDetailTOList,newEstimateNo);
@@ -82,7 +82,7 @@ public class LogisalesServiceImpl implements LogisalesService {
 
 		StringBuffer newEstimateNo = null;
 
-		int i = estimateMapper.selectEstimateCount(estimateDate);
+		int i = estimateMapper.selectEstimateCount(estimateDate); // ESTIMATE_SEQ(시퀀스)를 받아옴
 
 		newEstimateNo = new StringBuffer();
 		newEstimateNo.append("ES");
@@ -165,9 +165,9 @@ public class LogisalesServiceImpl implements LogisalesService {
 			switch (status) {
 
 			case "INSERT":
-				if(cnt==1) {
+				if(cnt==1) { // 새로운 견적에 견적 상세를 등록한 경우
 					estimateMapper.insertEstimateDetail(bean);
-				}else {
+				}else { // 기존 견적에 견적 상세를 추가한 경우
 					ArrayList<EstimateDetailTO> newList = estimateMapper.selectEstimateDetailCount(estimateNo);
 					int newCnt;
 					for(EstimateDetailTO newbean : newList) {
